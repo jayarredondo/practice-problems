@@ -145,3 +145,60 @@ function repeatedString(s, n) {
 console.log("Repeated String");
 console.log(repeatedString('abc', 10), "Correct Answer: 4")
 console.log(repeatedString('acabaa', 15), "Correct Answer: 11")
+
+//------------------------------------------------------------------------
+// Given a 6x6 2d Array, arr:
+
+// 1 1 1 0 0 0
+// 0 1 0 0 0 0
+// 1 1 1 0 0 0
+// 0 0 0 0 0 0
+// 0 0 0 0 0 0
+// 0 0 0 0 0 0
+
+// An hour glass in A is a subset of values with indices falling in this patter in arr's graphical representation:
+
+// a b c
+//   d
+// e f g
+
+// There are 16 hourglasses in arr. An hourglass sum is the sum of an hourglass' values. Calculate the hourglass sum
+// for every hourglass in arr, then print the maximum hourglass sum.
+
+// Contraints
+// -9 <= arr[i][j] <= 9
+// 0 <= i, j <= 5
+
+function hourglassSum(arr) {
+    var maxX = 3;
+    var maxY = 3;
+    var total = -63
+    //begin at y = 0
+        for(var y = 0; y <= maxY; y++) {
+            for (var x = 0; x <= maxX; x++) {
+                // sum for top row of hourglass
+                var sum = arr[y][x] + arr[y][x+1] + arr[y][x+2];
+                // sum for middle row of hourglass
+                sum += arr[y+1][x+1]
+                // sum for bottom row of hourglass
+                sum += arr[y+2][x] + arr[y+2][x+1] + arr [y+2][x+2]
+                if (total < sum) {
+                    total = sum;
+                }
+            }
+        }
+        return total;
+}
+
+let arr1 = [
+    [1, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0 ,0],
+    [1, 1, 1, 0, 0, 0],
+    [0, 0, 2, 3, 4, 0],
+    [0, 0, 0, 9, 0, 0],
+    [0, 0, 2, -9, 4, 0]
+];
+
+console.log(hourglassSum(arr1), "Correct Answer: 15")
+
+
